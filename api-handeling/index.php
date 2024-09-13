@@ -16,6 +16,8 @@ $conn = new mysqli($hostName, $userName, $password, $dbName);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
     <style>
         table {
             width: 100%;
@@ -34,50 +36,53 @@ $conn = new mysqli($hostName, $userName, $password, $dbName);
             padding: 1rem;
         }
     </style>
+
 </head>
 
 <body>
 
-
-    <table>
-        <thead>
-            <tr>
-                <th>S.N</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $select_query = "SELECT * FROM product";
-            $select_result = $conn->query($select_query);
-            $datas = mysqli_fetch_all($select_result, MYSQLI_ASSOC);
-            $i = 0;
-            foreach ($datas as $data):
-            ?>
+    <div class="container">
+        <a href="../index.php" class="btn btn-primary my-4">back</a>
+        <table>
+            <thead>
                 <tr>
-                    <th><?= $i++ ?></th>
-                    <th><?= $data['name'] ?></th>
-
-                    <th>
-                        <form action="">
-                            <!-- Use data attributes to store item ID and quantity -->
-                            <input type="hidden" class="itemId" value="<?= $data['id'] ?>"> <!-- ID of the item -->
-                            <input type="button" value="+" onclick="changeValue(this, 1)">
-                            <input type="text" class="quantity" disabled value="<?= $data['quantity'] ?>">
-                            <input type="button" value="-" onclick="changeValue(this, -1)">
-                        </form>
-                    </th>
-                    <th><?= $data['price'] ?></th>
+                    <th>S.N</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
                 </tr>
-            <?php
-            endforeach;
-            ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php
+                $select_query = "SELECT * FROM product";
+                $select_result = $conn->query($select_query);
+                $datas = mysqli_fetch_all($select_result, MYSQLI_ASSOC);
+                $i = 0;
+                foreach ($datas as $data):
+                ?>
+                    <tr>
+                        <th><?= $i++ ?></th>
+                        <th><?= $data['name'] ?></th>
 
+                        <th>
+                            <form action="">
+                                <!-- Use data attributes to store item ID and quantity -->
+                                <input type="hidden" class="itemId" value="<?= $data['id'] ?>"> <!-- ID of the item -->
+                                <input type="button" value="+" onclick="changeValue(this, 1)">
+                                <input type="text" class="quantity" disabled value="<?= $data['quantity'] ?>">
+                                <input type="button" value="-" onclick="changeValue(this, -1)">
+                            </form>
+                        </th>
+                        <th><?= $data['price'] ?></th>
+                    </tr>
+                <?php
+                endforeach;
+                ?>
+            </tbody>
+        </table>
+
+    </div>
 
 
 
@@ -109,6 +114,8 @@ $conn = new mysqli($hostName, $userName, $password, $dbName);
                     error))
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
